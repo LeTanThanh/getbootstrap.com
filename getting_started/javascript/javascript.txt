@@ -1,0 +1,58 @@
+JAVASCRIPT
+
+Bring Bootstrao to life with our optional Javascript plugins built on jQuery.
+Learn more about each plugin, our data and programmatic API options, and more.
+
+INDIVIDUAL OR COMPILED
+
+Plugins can be included individually (using Bootstrap's individual js/dist/*.js) or all at once using bootstrap.js
+or the minified bootstrap.min.js (don't include both).
+
+If you use a bundler (Webpack, Rollup, ...), you can use /js/dist/*.js files which are UMD ready.
+
+DEPENDENCIES
+
+Some plugins and CSS components depend on other plugins.
+If you include plugins individually, make sure to check for these dependencies in the docs.
+Also note that all plugins depend on jQuery (this mean jQuery must be included before the plugin files).
+
+Our dropdowns, popovers and tooltips also depend on Popper.js.
+
+DATA ATTRIBUTES
+
+Nearly all Bootstrap plugins can be enabled and configured through HTML alone with data attributes (our preferred way of using Javascript functionality).
+Be sure to only use one to set of data attributes on a single element(you cannot trogger a tooltip and modal from the same button)
+
+However, in some situations it may be desirable to disable this functionality.
+To disable the data attribute API, unbind all events on the document namespaced woth data-api like so
+
+$(document).off('data-api');
+
+Alternatively, to target a specific plugin, just include the plugon's name as a namespace along with the data-api namespace like thif:
+
+$(document).off('.alert.data-api');
+
+EVENTS
+
+All infinitive events provise preventDefault() functionality. This provide the ability to stop the execution of an action before it starts.
+Returning false from an eveent handler will also automatically call preventDefault().
+
+$('#myModal').on('show.bs.modal', function(e) {
+  if (!data) {
+    // stops modal from being shown
+    return e.preventDefault();
+  }
+});
+
+PROGRAMMATIC API
+
+We also believe you should be able to use all Bootstrap plugins purely through the Javascript API.
+All public APIs are single. chainable methods and return the collection acted upon.
+
+$('.btn-danger').button('toggle').addClass('fat');
+
+All methods should accept an optional options object, a string which targets a partucular method, or nothing.
+
+$('#myModal').modal();
+$('#myModal').modal({ keyboard: false });
+$('#myModal').modal('show');
